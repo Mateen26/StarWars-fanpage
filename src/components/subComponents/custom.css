@@ -1,0 +1,19 @@
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 5rem;
+}
+
+.slick-slide img {
+  width: 100%;
+  height: auto;
+}
+.peraGraph{
+  padding: 5rem;
+}
+.home-heading{
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 3rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

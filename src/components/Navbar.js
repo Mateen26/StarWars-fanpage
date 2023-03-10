@@ -17,8 +17,8 @@ const Navbar = () => {
         {/* 1st logo part  */}
         <div className="logo">
           <h2>
-            <span>F</span>an
-            <span>P</span>age
+            <span>S</span>tar
+            <span>W</span>ars
           </h2>
         </div>
 
