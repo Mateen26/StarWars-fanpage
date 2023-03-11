@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./navbar.css";
 import {
   FaFacebookSquare,
   FaInstagramSquare,

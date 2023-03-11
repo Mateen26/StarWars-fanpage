@@ -3,7 +3,7 @@ import Navbar from './../Navbar';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import "./custom.css"
+// import "./custom.css"
 
 const Home = (props) => {
 
@@ -15,7 +15,8 @@ const Home = (props) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3500,
-    pauseOnHover: false
+    pauseOnHover: false,
+    Responsive:true
   };
   return (
     <>
