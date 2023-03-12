@@ -5,9 +5,12 @@ import People from "./components/subComponents/People";
 import Planets from "./components/subComponents/Planets";
 import StarShips from "./components/subComponents/StarShips";
 import Home from "./components/subComponents/Home";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
+    <>
+    <Navbar/>
     <Switch>
       <Route exact path="/">
       <Home/>
@@ -28,6 +31,7 @@ const App = () => {
         <StarShips/>
       </Route>
     </Switch>
+    </>
   );
 };
 

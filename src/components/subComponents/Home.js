@@ -1,9 +1,7 @@
 import React from 'react';
-import Navbar from './../Navbar';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import "./custom.css"
 
 const Home = (props) => {
 
@@ -20,7 +18,6 @@ const Home = (props) => {
   };
   return (
     <>
-      <Navbar />
       <section className='home-heading' >
         <h2> ALL OF YOUR STAR WARS FAVORITES NOW STREAMING ON DISNEY+</h2>
       </section>
