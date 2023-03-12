@@ -64,6 +64,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
+                href="#"
                 target="_mateen">
                 <FaInstagramSquare className="instagram" />
               </a>

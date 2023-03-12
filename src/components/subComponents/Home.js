@@ -27,16 +27,16 @@ const Home = (props) => {
       <div className='slider-container'>
       <Slider {...settings}>
         <div>
-            <img src={process.env.PUBLIC_URL + '/Images/starwars1.jpg'} alt="Image 1" />
+            <img src={process.env.PUBLIC_URL + '/Images/starwars1.jpg'} alt="starwars-1" />
         </div>
         <div>
-          <img src={process.env.PUBLIC_URL + '/Images/starwars2.jpg'} alt="Image 2" />
+            <img src={process.env.PUBLIC_URL + '/Images/starwars2.jpg'} alt="starwars-2" />
         </div>
         <div>
-          <img src={process.env.PUBLIC_URL + '/Images/starwars3.png'} alt="Image 3" />
+            <img src={process.env.PUBLIC_URL + '/Images/starwars3.png'} alt="starwars-3" />
         </div>
         <div>
-          <img src={process.env.PUBLIC_URL + '/Images/starwars4.jpg'} alt="Image 3" />
+            <img src={process.env.PUBLIC_URL + '/Images/starwars4.jpg'} alt="starwars-4" />
         </div>
       </Slider>
       </div>
