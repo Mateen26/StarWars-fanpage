@@ -38,10 +38,14 @@ const globalStyles = makeStyles((theme) => ({
     fontSize: '3.25rem',
     fontWeight: 'bold',
     transition: "transform 0.7s ease-in-out",
-    "&:hover": {
-      transform: "scale(1.05)",
-      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
-    },
+    borderRadius: '20px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+
+
+    // "&:hover": {
+    //   transform: "scale(1.05)",
+    //   boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+    // },
 
   },
   closeButton: {
@@ -53,7 +57,7 @@ const globalStyles = makeStyles((theme) => ({
      height: '100%'
   },
   dialogDetailStyles: {
-    borderRadius: '15px',
+    borderRadius: '20px',
     boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
     padding: '20px',
     '& > *': {
