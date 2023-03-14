@@ -21,11 +21,11 @@ const globalStyles = makeStyles((theme) => ({
   },
   paper: {
     background: 'linear-gradient(45deg, #283048 30%, #859398 90%)',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     padding: theme.spacing(2),
     textAlign: "center",
     height: 200,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     transition: "transform 0.3s ease-in-out",
     "&:hover": {
       transform: "scale(1.05)",
@@ -83,8 +83,7 @@ const globalStyles = makeStyles((theme) => ({
   dialogTitleStyles: {
     fontSize: '3.25rem',
     fontWeight: 'bold',
-  }
-
+  },
 
 }));
 

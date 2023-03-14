@@ -6,6 +6,8 @@ import globalStyles from '../../globalStyles';
 import { setLoading } from '../../store/loaderSlicer';
 import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import { DataContext } from './../../DataContext';
+import CommonDialog from './../../Common/CommonDialog';
 
 const People = (props) => {
   const isLoading = useSelector((state) => state.Loader.isLoading);
@@ -20,7 +22,7 @@ const People = (props) => {
 
   const dispatch = useDispatch()
 
-  const handleClickOpen = (person) => {
+  const handleClickOpen =  (person) => {
     setSelectedPerson(person);
     setOpen(true);
   };
@@ -28,7 +30,6 @@ const People = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   useEffect(() => {
     if (open) {
       const fetchFilmsData = async () => {
@@ -142,63 +143,12 @@ const People = (props) => {
           ))}
         </Grid>
 
-        <Dialog
-
-          className={globalClasses.dialog}
-          open={open}
-          onClose={handleClose}
-          ref={node => {
-            if (node !== null) {
-              const dialogEl = node.querySelector(".MuiDialog-paper");
-              if (dialogEl !== null) {
-                dialogEl.removeAttribute("tabindex");
-              }
-            }
-          }}
-        >
-          <div className="dialogTitle">{selectedPerson?.name}</div>
-          <DialogContent>
-            <DialogContentText variant='h4' className={globalClasses?.dialogDetailStyles}>
-              <strong>Hair Color:  </strong> {selectedPerson?.hair_color}<br />
-
-              <strong>Skin Color:  </strong> {selectedPerson?.skin_color}<br />
-
-              <strong>Height:  </strong> {selectedPerson?.height} cm<br />
-
-              <strong>Mass:  </strong> {selectedPerson?.mass}kg<br />
-
-              <strong>Films:  </strong> {selectedPerson?.films?.length}<br />
-
-              {filmsData.map((film, index) => (
-                <div key={index}>
-                  <strong>Film {index + 1}:</strong> {film.title}
-                </div>
-              ))}
-              <strong>StarShips:  </strong> {selectedPerson?.starships?.length}<br />
-              {starshipsData.map((film, index) => (
-                <div key={index}>
-                  <strong>StarShip {index + 1}:</strong> {film.name}<br />
-                </div>
-              ))}
-              <strong>Vehicles:  </strong> {selectedPerson?.vehicles?.length}<br />
-              {vehiclesData.map((film, index) => (
-                <div key={index}>
-                  <strong>Vehicle {index + 1}:</strong> {film.name}
-                </div>
-              ))}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-          {isLoading && 
-              <div className='buttonLoader'>
-               <CircularProgress size="5rem"/>
-                <Typography variant='h4' >Please Wait</Typography>
-              </div>}
-            <Button className={globalClasses.closeButton} onClick={handleClose} color="primary">Close</Button>
-          </DialogActions>
-
-        </Dialog>
-
+        <DataContext.Provider value={{ selectedPerson, filmsData, starshipsData, vehiclesData }}>
+           <CommonDialog
+            open={open}
+            handleClose={handleClose}
+           />
+        </DataContext.Provider>
 
         {page?.next && (
           <Box className={globalClasses.loadMoreContainer}>

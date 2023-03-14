@@ -373,6 +373,13 @@ li {
   background: #ffffffbd;
 }
 
+/* ----------------------------------------------------------films page css start ------------------------------------------------- */
+ .filmsCard {
+   box-shadow: 0 3px 5px 2px rgba(0, 174, 239, 0.3);
+   transition: transform 0.3s ease-in-out;
+ }
 
-
-
+ .filmsCard:hover {
+   transform: scale(1.05);
+   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+ }
