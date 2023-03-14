@@ -4,13 +4,15 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { setLoading } from '../../store/loaderSlicer';
+import globalStyles from '../../globalStyles';
 
 
 const Films = (props) => {
   const [films, setFilms] = useState([]);
   console.log('films: ', films);
-const dispatch = useDispatch()
-  
+  const dispatch = useDispatch()
+  const globalClasses = globalStyles();
+
   const filmImages = [
     '/Images/aNewHope.jpg',
     '/Images/TheEmpStrikeBackjpg.jpg',
@@ -51,15 +53,15 @@ const dispatch = useDispatch()
   }
   return (
     <Container maxWidth="xl" minheight="100vh">
-      <Typography variant="h1" align="center" gutterBottom>All The Star Wars Films</Typography>
-      <Grid container spacing={4}>
+      <Typography variant="h2" align="center" gutterBottom>All The Star Wars Films</Typography>
+      <Grid  container spacing={4}>
         {films.map((e,index) => (
-      <Grid item xs={12} sm={8} md={4} key={index}>
-          <CardActionArea key={index}>
+          <Grid  item xs={12} sm={8} md={4} key={index}>
+            <CardActionArea className={'filmsCard'} key={index}>
           <CardMedia
             component="img"
             alt={e.title}
-            height="310"
+            height="300"
             image={process.env.PUBLIC_URL + filmImages[index]}
             title={e.title}
           />
