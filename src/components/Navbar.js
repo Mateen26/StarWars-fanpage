@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   FaFacebookSquare,
+  FaGithub,
   FaInstagramSquare,
   FaLinkedin,
 } from "react-icons/fa";
@@ -50,6 +51,13 @@ const Navbar = () => {
           <ul className="social-media-desktop">
             <li>
               <a
+                href="https://github.com/Mateen26"
+                target="_mateen">
+                <FaGithub className="instagram" />
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://www.linkedin.com/in/mateen-rajput-193a50188/"
                 target="_mateen">
                 <FaLinkedin className="youtube" />
@@ -60,13 +68,6 @@ const Navbar = () => {
                 href="https://www.facebook.com/mateen.rajput.92/"
                 target="_mateen">
                 <FaFacebookSquare className="facebook" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_mateen">
-                <FaInstagramSquare className="instagram" />
               </a>
             </li>
           </ul>
