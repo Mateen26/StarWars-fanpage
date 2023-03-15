@@ -19,6 +19,18 @@ const globalStyles = makeStyles((theme) => ({
       boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     },
   },
+  PlanetsLoadMoreButton: {
+    fontSize: 18,
+    padding: theme.spacing(2, 4),
+    borderRadius: 50,
+    background: "linear-gradient(45deg, #003973 30%, #E5E5BE 90%)",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    "&:hover": {
+      background: "linear-gradient(45deg, #E5E5BE 30%, #003973 90%)",
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    },
+  },
   paper: {
     cursor: 'pointer',
     background: 'linear-gradient(45deg, #283048 30%, #859398 90%)',
@@ -26,6 +38,20 @@ const globalStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     height: 200,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    transition: "transform 0.3s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.05)",
+      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+    },
+  },
+  planetsPaper: {
+    borderRadius:80,
+    background: 'linear-gradient(45deg, #003973 30%, #E5E5BE 90%)',
+    color: 'white',
+    padding: theme.spacing(2),
+    textAlign: "center",
+    height: 350,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     transition: "transform 0.3s ease-in-out",
     "&:hover": {
