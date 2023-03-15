@@ -8,6 +8,7 @@ export const FetchData = async (selectedPerson) => {
         { name: 'characters', urls: selectedPerson?.characters || [] },
         { name: 'species', urls: selectedPerson?.species || [] },
         { name: 'planets', urls: selectedPerson?.planets || [] },
+        { name: 'pilots', urls: selectedPerson?.pilots || [] },
       ];
 
       const requests = [];
@@ -29,8 +30,9 @@ export const FetchData = async (selectedPerson) => {
       const CharactersData = await Promise.all(responses[3].map((res) => res.json()));
       const speciesData = await Promise.all(responses[4].map((res) => res.json()));
       const planetsData = await Promise.all(responses[5].map((res) => res.json()));
+      const pilotsData = await Promise.all(responses[6].map((res) => res.json()));
 
-      return { filmsData, shipData, vehiclesData, CharactersData, speciesData, planetsData };
+      return { filmsData, shipData, vehiclesData, CharactersData, speciesData, planetsData, pilotsData };
     }
   } catch (error) {
     console.error('Error fetching data: ', error);

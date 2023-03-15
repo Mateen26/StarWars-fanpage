@@ -15,7 +15,7 @@ const Films = (props) => {
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-
+  const type = "films"
   const dispatch = useDispatch()
   const globalClasses = globalStyles();
 
@@ -96,7 +96,7 @@ const Films = (props) => {
         ))}
       </Grid>
       {open &&
-      <DataContext.Provider value={{ selectedFilm, data  }}>
+        <DataContext.Provider value={{ selectedFilm, data, type  }}>
         <CommonDialog
           open={open}
           handleClose={handleClose}

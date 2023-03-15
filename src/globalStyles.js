@@ -31,6 +31,18 @@ const globalStyles = makeStyles((theme) => ({
       boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     },
   },
+  shipsLoadMoreButton: {
+    fontSize: 18,
+    padding: theme.spacing(2, 4),
+    borderRadius: 50,
+    background: "linear-gradient(45deg, #2b5876 30%, #4e4376 90%)",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    "&:hover": {
+      background: "linear-gradient(45deg, #4e4376 30%, #2b5876 90%)",
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    },
+  },
   paper: {
     cursor: 'pointer',
     background: 'linear-gradient(45deg, #283048 30%, #859398 90%)',
@@ -52,6 +64,21 @@ const globalStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     height: 350,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    transition: "transform 0.3s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.05)",
+      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+    },
+  },
+  shipsPaper: {
+    cursor: 'pointer',
+    borderRadius:10,
+    background: 'linear-gradient(45deg, #2b5876 30%, #4e4376 90%)',
+    color: 'white',
+    padding: theme.spacing(2),
+    textAlign: "center",
+    height: 310,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     transition: "transform 0.3s ease-in-out",
     "&:hover": {
