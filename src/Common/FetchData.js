@@ -1,25 +1,36 @@
 export const FetchData = async (selectedPerson) => {
   try {
     if (selectedPerson) {
-      const filmsUrls = selectedPerson?.films || [];
-      const starShipsUrls = selectedPerson?.starships || [];
-      const vehiclesUrls = selectedPerson?.vehicles || [];
+      const urls = [
+        { name: 'films', urls: selectedPerson?.films || [] },
+        { name: 'starships', urls: selectedPerson?.starships || [] },
+        { name: 'vehicles', urls: selectedPerson?.vehicles || [] },
+        { name: 'characters', urls: selectedPerson?.characters || [] },
+        { name: 'species', urls: selectedPerson?.species || [] },
+        { name: 'planets', urls: selectedPerson?.planets || [] },
+      ];
 
-      const requests = filmsUrls.map((url) => fetch(url));
-      const shipRequests = starShipsUrls.map((url) => fetch(url));
-      const vehiclesRequests = vehiclesUrls.map((url) => fetch(url));
+      const requests = [];
+      const responses = [];
 
-      const [responses, shipResponses, vehiclesResponses] = await Promise.all([
-        Promise.all(requests),
-        Promise.all(shipRequests),
-        Promise.all(vehiclesRequests)
-      ]);
+      urls.forEach(({ name, urls }) => {
+        const requestsArray = urls.map((url) => fetch(url));
+        requests.push(requestsArray);
+      });
 
-      const filmsData = await Promise.all(responses.map((res) => res.json()));
-      const shipData = await Promise.all(shipResponses.map((res) => res.json()));
-      const vehiclesData = await Promise.all(vehiclesResponses.map((res) => res.json()));
+      for (let i = 0; i < urls.length; i++) {
+        const data = await Promise.all(requests[i]);
+        responses.push(data);
+      }
 
-      return { filmsData, shipData, vehiclesData };
+      const filmsData = await Promise.all(responses[0].map((res) => res.json()));
+      const shipData = await Promise.all(responses[1].map((res) => res.json()));
+      const vehiclesData = await Promise.all(responses[2].map((res) => res.json()));
+      const CharactersData = await Promise.all(responses[3].map((res) => res.json()));
+      const speciesData = await Promise.all(responses[4].map((res) => res.json()));
+      const planetsData = await Promise.all(responses[5].map((res) => res.json()));
+
+      return { filmsData, shipData, vehiclesData, CharactersData, speciesData, planetsData };
     }
   } catch (error) {
     console.error('Error fetching data: ', error);
