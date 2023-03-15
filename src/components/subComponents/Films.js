@@ -7,14 +7,15 @@ import { setLoading } from '../../store/loaderSlicer';
 import globalStyles from '../../globalStyles';
 import { DataContext } from './../../DataContext';
 import CommonDialog from './../../Common/CommonDialog';
+import { FetchData } from './../../Common/FetchData';
 
 
 const Films = (props) => {
   const [films, setFilms] = useState([]);
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
 
-  console.log('films: ', films);
   const dispatch = useDispatch()
   const globalClasses = globalStyles();
 
@@ -34,22 +35,28 @@ const Films = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = (e) => {
-    // onClick(film);
+  const handleClick = async (e) => {
+
     setSelectedFilm(e)
+    dispatch(setLoading(true))
+
+    const result = await FetchData(e);
+    setData(result);
     setOpen(true)
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
   };
   const loadData = () => {
-    // dispatch(setLoading(true))
+    dispatch(setLoading(true))
 
     try {
       axios.get('https://swapi.dev/api/films')
         .then(response => {
           setFilms(response.data.results);
-          // setPage(response.data);
-          // setTimeout(() => {
-          //   dispatch(setLoading(false));
-          // }, 500);
+          setTimeout(() => {
+            dispatch(setLoading(false));
+          }, 500);
         })
         .catch(error => {
           console.log(error);
@@ -57,6 +64,9 @@ const Films = (props) => {
 
     } catch (error) {
       console.log('error: ', error);
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
 
     }
 
@@ -85,14 +95,14 @@ const Films = (props) => {
           </Grid>
         ))}
       </Grid>
-
-      <DataContext.Provider value={{ selectedFilm }}>
+      {open &&
+      <DataContext.Provider value={{ selectedFilm, data  }}>
         <CommonDialog
           open={open}
           handleClose={handleClose}
         />
       </DataContext.Provider>
-   
+      }
     </Container>
   );
 };

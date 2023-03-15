@@ -20,6 +20,7 @@ const globalStyles = makeStyles((theme) => ({
     },
   },
   paper: {
+    cursor: 'pointer',
     background: 'linear-gradient(45deg, #283048 30%, #859398 90%)',
     color: 'white',
     padding: theme.spacing(2),
