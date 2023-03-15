@@ -1,76 +1,44 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Container, Typography, Grid, Card, CardContent, Box, makeStyles, Paper } from '@material-ui/core';
+import { Button, Container, Typography, Grid, Box, Paper, CardContent } from '@material-ui/core';
 import globalStyles from '../../globalStyles';
 import { setLoading } from '../../store/loaderSlicer';
-import { useDispatch, useSelector } from 'react-redux';
-import { CircularProgress } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { DataContext } from './../../DataContext';
 import CommonDialog from './../../Common/CommonDialog';
+import { FetchData } from './../../Common/FetchData';
 
 const People = (props) => {
-  const isLoading = useSelector((state) => state.Loader.isLoading);
   const [people, setPeople] = useState([]);
   const [page, setPage] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [open, setOpen] = useState(false);
-  const [filmsData, setFilmsData] = useState([]);
-  const [starshipsData, setStarshipsData] = useState([]);
-  const [vehiclesData, setVehiclesData] = useState([]);
+  const [data, setData] = useState([]);
   const globalClasses = globalStyles();
+
+  const type = "people"
 
   const dispatch = useDispatch()
 
-  const handleClickOpen =  (person) => {
+  const handleClickOpen = async (person) => {
+    dispatch(setLoading(true))
+   
     setSelectedPerson(person);
+    const result = await FetchData(person);
+    setData(result);
     setOpen(true);
+   
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  useEffect(() => {
-    if (open) {
-      const fetchFilmsData = async () => {
-        dispatch(setLoading(true))
-        try {
-          const filmsUrls = selectedPerson?.films || [];
-          const starShipsUrls = selectedPerson?.starships || [];
-          const vehiclesUrls = selectedPerson?.vehicles || [];
-
-          const requests = filmsUrls.map((url) => fetch(url));
-          const shipRequests = starShipsUrls.map((url) => fetch(url));
-          const vehiclesRequests = vehiclesUrls.map((url) => fetch(url));
-
-          const [responses, shipResponses, vehiclesResponses] = await Promise.all([
-            Promise.all(requests),
-            Promise.all(shipRequests),
-            Promise.all(vehiclesRequests)
-          ]);
-
-          const filmsData = await Promise.all(responses.map((res) => res.json()));
-          const shipData = await Promise.all(shipResponses.map((res) => res.json()));
-          const vehiclesData = await Promise.all(vehiclesResponses.map((res) => res.json()));
-
-          setFilmsData(filmsData);
-          setStarshipsData(shipData);
-          setVehiclesData(vehiclesData);
-          setTimeout(() => {
-            dispatch(setLoading(false));
-          }, 500);
-        } catch (error) {
-          
-          console.error('Error fetching data: ', error);
-          setTimeout(() => {
-            dispatch(setLoading(false));
-          }, 500);
-        }
-      };
-
-      fetchFilmsData();
-    }
-  }, [open, selectedPerson]);
+ 
 
   useEffect(() => {
     loadData()
@@ -83,8 +51,13 @@ const People = (props) => {
     try {
       axios.get('https://swapi.dev/api/people')
         .then(response => {
-          setPeople(response.data.results);
-          setPage(response.data);
+          if (response?.status == 200) {
+            setPeople(response.data.results);
+            setPage(response.data);
+          }
+          else {
+            alert('Error Fetching Data From Api')
+          }
           setTimeout(() => {
             dispatch(setLoading(false));
           }, 500);
@@ -142,13 +115,13 @@ const People = (props) => {
             </Grid>
           ))}
         </Grid>
-
-        <DataContext.Provider value={{ selectedPerson, filmsData, starshipsData, vehiclesData }}>
-           <CommonDialog
-            open={open}
-            handleClose={handleClose}
-           />
-        </DataContext.Provider>
+        {open &&
+          <DataContext.Provider value={{ selectedPerson, data, type }}>
+            <CommonDialog
+              open={open}
+              handleClose={handleClose}
+            />
+          </DataContext.Provider>}
 
         {page?.next && (
           <Box className={globalClasses.loadMoreContainer}>
