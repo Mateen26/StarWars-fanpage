@@ -7,7 +7,6 @@ import { useContext } from 'react';
 import { DataContext } from '../DataContext';
 
 const CommonDialog = (props) => {
- 
   const { selectedPerson, data, type, selectedFilm } = useContext(DataContext);
   
   const isLoading = useSelector((state) => state.Loader.isLoading);
@@ -80,35 +79,45 @@ const CommonDialog = (props) => {
 
                   <strong>Release date:  </strong> {selectedFilm?.release_date}<br />
 
-                  <strong>Characters:  </strong> {selectedFilm?.characters.length}<br />
-                  {/* {charactersData.map((film, index) => (
+                  <strong>Characters:  </strong> {data?.CharactersData.length}<br />
+                  
+                  {data && data?.CharactersData.map((e, index) => (
                     <span key={index}>
-                      <strong>Film {index + 1}:</strong> {film.title}
+                      <strong>Character {index + 1}:</strong> {e.name}
                     </span>
-                  ))} */}
+                  ))}
                   <br />
                   <strong>Planets:  </strong> {selectedFilm?.planets?.length}<br />
 
-                  {/* {planetsData.map((film, index) => (
+                  {data && data?.planetsData.map((e, index) => (
                     <span key={index}>
-                      <strong>StarShip {index + 1}:</strong> {film.name}<br />
+                      <strong>Planets {index + 1}:</strong> {e.name}<br />
                     </span>
-                  ))} */}
+                  ))}
                   <br />
+
                   <strong>Species:  </strong> {selectedFilm?.species?.length}<br />
 
-                  {/* {speciesData.map((film, index) => (
+                  {data && data?.speciesData.map((e, index) => (
                     <span key={index}>
-                      <strong>Vehicle {index + 1}:</strong> {film.name}
+                      <strong>Specie {index + 1}:</strong> {e.name}
                     </span>
-                  ))} */}
+                  ))}
                   <strong>Starships:  </strong> {selectedFilm?.starships?.length}<br />
 
-                  {/* {starshipsData.map((film, index) => (
+                  {data && data?.shipData.map((e, index) => (
                     <span key={index}>
-                      <strong>Vehicle {index + 1}:</strong> {film.name}
+                      <strong>Starship {index + 1}:</strong> {e.name}
                     </span>
-                  ))} */}
+                  ))}
+
+                  <strong>Vehicles:  </strong> {selectedFilm?.vehicles?.length}<br />
+
+                  {data && data?.vehiclesData.map((e, index) => (
+                    <span key={index}>
+                      <strong>Vehicle {index + 1}:</strong> {e.name}
+                    </span>
+                  ))}
                 </DialogContentText>
               </DialogContent>
 
