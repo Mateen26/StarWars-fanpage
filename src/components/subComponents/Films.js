@@ -33,18 +33,23 @@ const Films = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const handleClick = async (e) => {
+    try {
+      setSelectedFilm(e)
+      dispatch(setLoading(true))
 
-    setSelectedFilm(e)
-    dispatch(setLoading(true))
+      const result = await FetchData(e);
+      setData(result);
 
-    const result = await FetchData(e);
-    setData(result);
+    } catch (error) {
+      console.log('Failed to fetch data:', error);
+    } finally {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
+    }
     setOpen(true)
-    setTimeout(() => {
-      dispatch(setLoading(false));
-    }, 500);
   };
 
   const loadData = () => {
@@ -89,7 +94,7 @@ const Films = () => {
                 onClick={() => handleClick(e)}
               />
               <CardContent>
-                <Typography gutterBottom variant="h3" component="div" style={{ textAlign: 'center'  }}>
+                <Typography gutterBottom variant="h3" component="div" style={{ textAlign: 'center' }}>
                   {e.title}
                 </Typography>
               </CardContent>

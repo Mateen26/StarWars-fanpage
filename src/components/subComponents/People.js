@@ -22,16 +22,18 @@ const People = () => {
   const dispatch = useDispatch()
 
   const handleClickOpen = async (person) => {
-    dispatch(setLoading(true))
+    try {
+      dispatch(setLoading(true))
 
-    setSelectedPerson(person);
-    const result = await FetchData(person);
-    setData(result);
-    setOpen(true);
-
-    setTimeout(() => {
+      setSelectedPerson(person);
+      const result = await FetchData(person);
+      setData(result);
+    } catch (error) {
+      console.log('Failed to fetch data:', error);
+    } finally {
       dispatch(setLoading(false));
-    }, 500);
+    }
+    setOpen(true);
   };
 
   const handleClose = () => {

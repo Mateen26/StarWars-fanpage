@@ -22,16 +22,20 @@ const StarShips = () => {
   const dispatch = useDispatch()
 
   const handleClickOpen = async (ship) => {
-    dispatch(setLoading(true))
+    try {
+      dispatch(setLoading(true))
 
-    setSelectedShip(ship);
-    const result = await FetchData(ship);
-    setData(result);
+      setSelectedShip(ship);
+      const result = await FetchData(ship);
+      setData(result);
+    } catch (error) {
+      console.log('Failed to fetch data:', error);
+    } finally {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
+    }
     setOpen(true);
-
-    setTimeout(() => {
-      dispatch(setLoading(false));
-    }, 500);
 
   };
 
@@ -92,6 +96,7 @@ const StarShips = () => {
 
   return (
     <>
+
       <Container maxWidth="xl" minheight="100vh">
         <Typography variant="h2" align="center" gutterBottom>This list shows all the Star Wars ships</Typography>
         <Grid container spacing={3}>
