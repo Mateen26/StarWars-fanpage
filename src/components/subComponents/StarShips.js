@@ -9,7 +9,7 @@ import { DataContext } from './../../DataContext';
 import CommonDialog from './../../Common/CommonDialog';
 import { FetchData } from './../../Common/FetchData';
 
-const StarShips = (props) => {
+const StarShips = () => {
   const [ships, setShips] = useState([]);
   const [page, setPage] = useState([]);
   const [selectedShip, setSelectedShip] = useState(null);
@@ -47,11 +47,10 @@ const StarShips = (props) => {
 
   const loadData = () => {
     dispatch(setLoading(true))
-
     try {
       axios.get('https://swapi.dev/api/starships')
         .then(response => {
-          if (response?.status == 200) {
+          if (response?.status === 200) {
             setShips(response.data.results);
             setPage(response.data);
           }
@@ -65,17 +64,14 @@ const StarShips = (props) => {
         .catch(error => {
           console.log(error);
         })
-
     } catch (error) {
       console.log('error: ', error);
-
     }
-
   }
+
   const handleLoadMore = () => {
     try {
       dispatch(setLoading(true))
-
       axios
         .get(page.next)
         .then((response) => {
@@ -88,19 +84,16 @@ const StarShips = (props) => {
         .catch((error) => {
           console.log(error);
         });
-
     } catch (error) {
       console.log('error: ', error);
     }
-
-
   };
 
 
   return (
     <>
       <Container maxWidth="xl" minheight="100vh">
-        <Typography variant="h1" align="center" gutterBottom>Star Wars ships</Typography>
+        <Typography variant="h2" align="center" gutterBottom>This list shows all the Star Wars ships</Typography>
         <Grid container spacing={3}>
           {ships.map(ship => (
             <Grid item xs={12} sm={8} md={4} key={ship?.name}>
@@ -116,18 +109,15 @@ const StarShips = (props) => {
           ))}
         </Grid>
         {open &&
-          <DataContext.Provider value={{ selectedShip, data, type }}>
-            <CommonDialog
-              open={open}
-              handleClose={handleClose}
-            />
+          <DataContext.Provider value={{ selectedShip, data, type, open, handleClose }}>
+            <CommonDialog />
           </DataContext.Provider>}
 
         {page?.next && (
           <Box className={globalClasses.loadMoreContainer}>
             <Button
               size='large'
-              className={globalClasses.shipsLoadMoreButton}
+              className={globalClasses.loadMoreButton}
               variant="contained"
               color="primary"
               onClick={handleLoadMore}

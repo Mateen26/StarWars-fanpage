@@ -6,7 +6,7 @@ import globalStyles from '../../globalStyles';
 import { setLoading } from '../../store/loaderSlicer';
 import { useDispatch } from 'react-redux';
 
-const Planets = (props) => {
+const Planets = () => {
   const [planets, setPlanets] = useState([]);
   const [page, setPage] = useState([]);
   const globalClasses = globalStyles();
@@ -20,11 +20,10 @@ const Planets = (props) => {
 
   const loadData = () => {
     dispatch(setLoading(true))
-
     try {
       axios.get('https://swapi.dev/api/planets')
         .then(response => {
-          if (response?.status == 200) {
+          if (response?.status === 200) {
             setPlanets(response.data.results);
             setPage(response.data);
           }
@@ -38,17 +37,14 @@ const Planets = (props) => {
         .catch(error => {
           console.log(error);
         })
-
     } catch (error) {
       console.log('error: ', error);
-
     }
-
   }
+
   const handleLoadMore = () => {
     try {
       dispatch(setLoading(true))
-
       axios
         .get(page.next)
         .then((response) => {
@@ -61,19 +57,16 @@ const Planets = (props) => {
         .catch((error) => {
           console.log(error);
         });
-
     } catch (error) {
       console.log('error: ', error);
     }
-
-
   };
 
 
   return (
     <>
       <Container maxWidth="xl" minheight="100vh">
-        <Typography variant="h2" align="center" gutterBottom>Planets</Typography>
+        <Typography variant="h2" align="center" gutterBottom>This List includes all the planets shown in star wars </Typography>
         <Grid container spacing={3}>
           {planets.map(planet => (
             <Grid item xs={8} sm={6} md={3} key={planet?.name}>
@@ -96,7 +89,7 @@ const Planets = (props) => {
           <Box className={globalClasses.loadMoreContainer}>
             <Button
               size='large'
-              className={globalClasses.PlanetsLoadMoreButton}
+              className={globalClasses.loadMoreButton}
               variant="contained"
               color="primary"
               onClick={handleLoadMore}

@@ -4,8 +4,6 @@ import { combineReducers } from "redux";
 import {
   persistReducer
 } from 'redux-persist'
-
-// reducers
 import loaderSlicer from './loaderSlicer';
 
 const reducers = combineReducers({

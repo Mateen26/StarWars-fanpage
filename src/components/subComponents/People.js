@@ -9,7 +9,7 @@ import { DataContext } from './../../DataContext';
 import CommonDialog from './../../Common/CommonDialog';
 import { FetchData } from './../../Common/FetchData';
 
-const People = (props) => {
+const People = () => {
   const [people, setPeople] = useState([]);
   const [page, setPage] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -23,22 +23,20 @@ const People = (props) => {
 
   const handleClickOpen = async (person) => {
     dispatch(setLoading(true))
-   
+
     setSelectedPerson(person);
     const result = await FetchData(person);
     setData(result);
     setOpen(true);
-   
+
     setTimeout(() => {
       dispatch(setLoading(false));
     }, 500);
-
   };
 
   const handleClose = () => {
     setOpen(false);
   };
- 
 
   useEffect(() => {
     loadData()
@@ -47,11 +45,10 @@ const People = (props) => {
 
   const loadData = () => {
     dispatch(setLoading(true))
-
     try {
       axios.get('https://swapi.dev/api/people')
         .then(response => {
-          if (response?.status == 200) {
+          if (response?.status === 200) {
             setPeople(response.data.results);
             setPage(response.data);
           }
@@ -65,17 +62,14 @@ const People = (props) => {
         .catch(error => {
           console.log(error);
         })
-
     } catch (error) {
       console.log('error: ', error);
-
     }
-
   }
+
   const handleLoadMore = () => {
     try {
       dispatch(setLoading(true))
-
       axios
         .get(page.next)
         .then((response) => {
@@ -88,19 +82,16 @@ const People = (props) => {
         .catch((error) => {
           console.log(error);
         });
-
     } catch (error) {
       console.log('error: ', error);
     }
-
-
   };
 
 
   return (
     <>
       <Container maxWidth="xl" minheight="100vh">
-        <Typography variant="h1" align="center" gutterBottom>Star Wars People</Typography>
+        <Typography variant="h2" align="center" gutterBottom>This list includes humans, droids and various alien species.</Typography>
         <Grid container spacing={2}>
           {people.map(person => (
             <Grid item xs={12} sm={8} md={4} key={person.name}>
@@ -116,12 +107,10 @@ const People = (props) => {
           ))}
         </Grid>
         {open &&
-          <DataContext.Provider value={{ selectedPerson, data, type }}>
-            <CommonDialog
-              open={open}
-              handleClose={handleClose}
-            />
-          </DataContext.Provider>}
+          <DataContext.Provider value={{ selectedPerson, data, type, open, handleClose }}>
+            <CommonDialog />
+          </DataContext.Provider>
+        }
 
         {page?.next && (
           <Box className={globalClasses.loadMoreContainer}>

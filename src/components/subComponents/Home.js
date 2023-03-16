@@ -35,7 +35,7 @@ const Home = (props) => {
     autoplay: true,
     autoplaySpeed: 3500,
     pauseOnHover: false,
-    Responsive:true
+    Responsive:true,
   };
 
   const seriesSettings = {
@@ -45,7 +45,6 @@ const Home = (props) => {
     infinite: true,
     speed: 800,
     slidesToShow: 3,
-    slidesToScroll: 1
   };
 
   const peopleSettings = {
@@ -75,7 +74,7 @@ const Home = (props) => {
 
       <div className='slider-container-below'>
         <div>
-          <h2>Latest Series</h2>
+          <h2>Latest Tv-Shows</h2>
           <Slider {...seriesSettings}>
             {seriesImages.map((image, index) => (
               <div key={index}>

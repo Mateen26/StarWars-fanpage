@@ -1,23 +1,21 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Container, CardActionArea, Grid } from '@material-ui/core';
+import { CardContent, CardMedia, Typography, Container, CardActionArea, Grid } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { setLoading } from '../../store/loaderSlicer';
-import globalStyles from '../../globalStyles';
 import { DataContext } from './../../DataContext';
 import CommonDialog from './../../Common/CommonDialog';
 import { FetchData } from './../../Common/FetchData';
 
 
-const Films = (props) => {
+const Films = () => {
   const [films, setFilms] = useState([]);
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const type = "films"
   const dispatch = useDispatch()
-  const globalClasses = globalStyles();
 
   const filmImages = [
     '/Images/aNewHope.jpg',
@@ -35,6 +33,7 @@ const Films = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+  
   const handleClick = async (e) => {
 
     setSelectedFilm(e)
@@ -47,13 +46,18 @@ const Films = (props) => {
       dispatch(setLoading(false));
     }, 500);
   };
+
   const loadData = () => {
     dispatch(setLoading(true))
-
     try {
       axios.get('https://swapi.dev/api/films')
         .then(response => {
-          setFilms(response.data.results);
+          if (response?.status === 200) {
+            setFilms(response.data.results);
+          }
+          else {
+            alert('Error Fetching Data From Api')
+          }
           setTimeout(() => {
             dispatch(setLoading(false));
           }, 500);
@@ -61,16 +65,14 @@ const Films = (props) => {
         .catch(error => {
           console.log(error);
         })
-
     } catch (error) {
       console.log('error: ', error);
       setTimeout(() => {
         dispatch(setLoading(false));
       }, 500);
-
     }
-
   }
+
   return (
     <Container maxWidth="xl" minheight="100vh">
       <Typography variant="h2" align="center" gutterBottom>All The Star Wars Films</Typography>
@@ -87,7 +89,7 @@ const Films = (props) => {
                 onClick={() => handleClick(e)}
               />
               <CardContent>
-                <Typography gutterBottom variant="h3" component="div" style={{ textAlign: 'center' }}>
+                <Typography gutterBottom variant="h3" component="div" style={{ textAlign: 'center'  }}>
                   {e.title}
                 </Typography>
               </CardContent>
@@ -96,12 +98,9 @@ const Films = (props) => {
         ))}
       </Grid>
       {open &&
-        <DataContext.Provider value={{ selectedFilm, data, type  }}>
-        <CommonDialog
-          open={open}
-          handleClose={handleClose}
-        />
-      </DataContext.Provider>
+        <DataContext.Provider value={{ selectedFilm, data, type, open, handleClose }}>
+          <CommonDialog />
+        </DataContext.Provider>
       }
     </Container>
   );

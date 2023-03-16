@@ -6,8 +6,8 @@ import { CircularProgress } from '@mui/material';
 import { useContext } from 'react';
 import { DataContext } from '../DataContext';
 
-const CommonDialog = (props) => {
-  const { selectedPerson, data, type, selectedFilm, selectedShip } = useContext(DataContext);
+const CommonDialog = () => {
+  const { open, handleClose, selectedPerson, data, type, selectedFilm, selectedShip } = useContext(DataContext);
 
   const isLoading = useSelector((state) => state.Loader.isLoading);
   const globalClasses = globalStyles();
@@ -17,10 +17,9 @@ const CommonDialog = (props) => {
     <>
 
       <Dialog
-
         className={globalClasses.dialog}
-        open={props?.open}
-        onClose={props?.handleClose}
+        open={open}
+        onClose={handleClose}
         ref={node => {
           if (node !== null) {
             const dialogEl = node.querySelector(".MuiDialog-paper");
@@ -31,7 +30,7 @@ const CommonDialog = (props) => {
         }}
       >
 
-        {type == "people" ? (
+        {type === "people" ? (
           <>
             <span className="dialogTitle">{selectedPerson?.name}</span>
             <DialogContent>
@@ -55,7 +54,7 @@ const CommonDialog = (props) => {
                 <strong>StarShips:  </strong> {selectedPerson?.starships?.length}<br />
                 {data && data?.shipData.map((film, index) => (
                   <span key={index}>
-                    <strong>StarShip {index + 1}:</strong> {film.name}<br />
+                    <strong>StarShip {index + 1}:</strong> {film.name}
                   </span>
                 ))}
                 <br />
@@ -68,7 +67,7 @@ const CommonDialog = (props) => {
               </DialogContentText>
             </DialogContent>
           </>
-        ) : type == "films" ? (
+        ) : type === "films" ? (
           <>
             <span className="dialogTitle">{selectedFilm?.title}</span>
             <DialogContent>
@@ -103,13 +102,14 @@ const CommonDialog = (props) => {
                     <strong>Specie {index + 1}:</strong> {e.name}
                   </span>
                 ))}
+                <br />
                 <strong>Starships:  </strong> {selectedFilm?.starships?.length}<br />
 
                 {data && data?.shipData.map((e, index) => (
                   <span key={index}>
                     <strong>Starship {index + 1}:</strong> {e.name}
                   </span>
-                ))}
+                ))}<br />
 
                 <strong>Vehicles:  </strong> {selectedFilm?.vehicles?.length}<br />
 
@@ -117,14 +117,14 @@ const CommonDialog = (props) => {
                   <span key={index}>
                     <strong>Vehicle {index + 1}:</strong> {e.name}
                   </span>
-                ))}
+                ))}<br />
               </DialogContentText>
             </DialogContent>
 
 
 
           </>
-        ) : type == "StarShips" ?(
+        ) : type === "StarShips" ? (
           <>
             <span className="dialogTitle">{selectedShip?.name}</span>
             <DialogContent>
@@ -163,13 +163,9 @@ const CommonDialog = (props) => {
                 ))}
               </DialogContentText>
             </DialogContent>
-
-
-
-
           </>
 
-          ): ''}
+        ) : ''}
 
         <DialogActions>
           {isLoading &&
@@ -177,7 +173,7 @@ const CommonDialog = (props) => {
               <CircularProgress size="5rem" />
               <Typography variant='h4' >Please Wait</Typography>
             </span>}
-          <Button className={globalClasses.closeButton} onClick={props?.handleClose} color="primary">Close</Button>
+          <Button className={globalClasses.closeButton} onClick={handleClose} color="primary">Close</Button>
         </DialogActions>
 
       </Dialog>

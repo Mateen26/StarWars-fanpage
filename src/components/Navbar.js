@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   FaFacebookSquare,
   FaGithub,
-  FaInstagramSquare,
   FaLinkedin,
 } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -14,7 +13,6 @@ const Navbar = () => {
   return (
     <>
       <nav className="main-nav">
-        {/* 1st logo part  */}
         <div className="logo">
           <h2>
             <span>S</span>tar
@@ -22,7 +20,6 @@ const Navbar = () => {
           </h2>
         </div>
 
-        {/* 2nd menu part  */}
         <div
           className={
             showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
@@ -52,27 +49,26 @@ const Navbar = () => {
             <li>
               <a
                 href="https://github.com/Mateen26"
-                target="_mateen">
-                <FaGithub className="instagram" />
+                target="_mat">
+                <FaGithub className="gitHub" />
               </a>
             </li>
             <li>
               <a
                 href="https://www.linkedin.com/in/mateen-rajput-193a50188/"
-                target="_mateen">
-                <FaLinkedin className="youtube" />
+                target="_ma">
+                <FaLinkedin className="linkedIn" />
               </a>
             </li>
             <li>
               <a
                 href="https://www.facebook.com/mateen.rajput.92/"
-                target="_mateen">
+                target="_m">
                 <FaFacebookSquare className="facebook" />
               </a>
             </li>
           </ul>
 
-          {/* hamburget menu start  */}
           <div className="hamburger-menu">
             <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
               <GiHamburgerMenu />
