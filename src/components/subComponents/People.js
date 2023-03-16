@@ -27,7 +27,12 @@ const People = () => {
 
       setSelectedPerson(person);
       const result = await FetchData(person);
+      if(result){
       setData(result);
+      }
+      else{
+        setData([])
+      }
     } catch (error) {
       console.log('Failed to fetch data:', error);
     } finally {

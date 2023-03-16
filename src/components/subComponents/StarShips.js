@@ -27,7 +27,12 @@ const StarShips = () => {
 
       setSelectedShip(ship);
       const result = await FetchData(ship);
-      setData(result);
+      if (result) {
+        setData(result);
+      }
+      else {
+        setData([])
+      }
     } catch (error) {
       console.log('Failed to fetch data:', error);
     } finally {

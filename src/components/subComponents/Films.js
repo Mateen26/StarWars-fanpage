@@ -40,7 +40,12 @@ const Films = () => {
       dispatch(setLoading(true))
 
       const result = await FetchData(e);
-      setData(result);
+      if (result) {
+        setData(result);
+      }
+      else {
+        setData([])
+      }
 
     } catch (error) {
       console.log('Failed to fetch data:', error);
