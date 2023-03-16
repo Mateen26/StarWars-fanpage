@@ -81,9 +81,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* hero section  */}
-      {/* <section className="hero-section">
-      </section> */}
     </>
   );
 };

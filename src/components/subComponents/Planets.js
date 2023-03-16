@@ -73,13 +73,13 @@ const Planets = (props) => {
   return (
     <>
       <Container maxWidth="xl" minheight="100vh">
-        <Typography variant="h1" align="center" gutterBottom>Planets</Typography>
-        <Grid container spacing={4}>
+        <Typography variant="h2" align="center" gutterBottom>Planets</Typography>
+        <Grid container spacing={3}>
           {planets.map(planet => (
-            <Grid item xs={12} sm={8} md={4} key={planet?.name}>
-              <Paper elevation={3} className={globalClasses.planetsPaper}>
+            <Grid item xs={8} sm={6} md={3} key={planet?.name}>
+              <Paper elevation={4} className={globalClasses.planetsPaper}>
                 <CardContent>
-                  <Typography variant="h1" component="h1">{planet?.name}</Typography>
+                  <Typography variant="h2" component="h1">{planet?.name}</Typography>
                   <Typography variant='h4' gutterBottom><strong>Climate:</strong>&nbsp; {planet?.climate}</Typography>
                   <Typography variant='h4' gutterBottom><strong>Diameter:</strong>&nbsp; {planet?.diameter}</Typography>
                   <Typography variant='h4' gutterBottom><strong>Population:</strong>&nbsp; {planet?.population}</Typography>

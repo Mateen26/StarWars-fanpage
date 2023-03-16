@@ -63,7 +63,7 @@ const globalStyles = makeStyles((theme) => ({
     color: 'white',
     padding: theme.spacing(2),
     textAlign: "center",
-    height: 350,
+    height: 360,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     transition: "transform 0.3s ease-in-out",
     "&:hover": {

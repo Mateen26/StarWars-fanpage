@@ -106,7 +106,7 @@ const StarShips = (props) => {
             <Grid item xs={12} sm={8} md={4} key={ship?.name}>
               <Paper elevation={3} className={globalClasses.shipsPaper} onClick={() => handleClickOpen(ship)}>
                 <CardContent>
-                  <Typography variant="h1" component="h1">{ship?.name}</Typography>
+                  <Typography variant="h2" component="h1">{ship?.name}</Typography>
                   <Typography variant='h4' gutterBottom><strong>model:</strong> {ship?.model}</Typography>
                   <Typography variant='h4' gutterBottom><strong>manufacturer:</strong> {ship?.manufacturer}</Typography>
                   <Typography variant='h4' gutterBottom><strong>starship class:</strong> {ship?.starship_class}</Typography>
